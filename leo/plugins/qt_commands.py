@@ -239,6 +239,7 @@ def add_gutter(event):
         return
     dw = c.frame.top
     gutter = dw.gutter
+    glayout = dw.gutter_layout
     if gutter.using_gutter:
         # NumberBar has a reference to gutter.edit.
         # Apparently, this causes problems.
@@ -247,8 +248,8 @@ def add_gutter(event):
         # glayout.removeWidget(gutter.number_bar)
         # glayout.invalidate()
         # glayout.addWidget(dw.gutter.edit)
+        # gutter.using_gutter = False
     else:
-        glayout = dw.gutter_layout
         glayout.removeWidget(gutter.edit)
         glayout.addWidget(gutter.number_bar)
         glayout.addWidget(gutter.edit)
