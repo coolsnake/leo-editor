@@ -247,6 +247,7 @@ def add_gutter(event):
         # glayout.removeWidget(gutter.edit)
         # glayout.removeWidget(gutter.number_bar)
         # glayout.invalidate()
+        # glayout.parent().layout().invalidate()
         # glayout.addWidget(dw.gutter.edit)
         # gutter.using_gutter = False
     else:
