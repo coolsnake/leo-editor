@@ -184,16 +184,22 @@ class DynamicWindow(QtWidgets.QMainWindow):
         vLayout = self.createVLayout(page2, 'bodyVLayout', spacing=6)
         grid = self.createGrid(bodyFrame, 'bodyGrid')
         innerGrid = self.createGrid(innerFrame, 'bodyInnerGrid')
+        gutter = qt_text.LeoLineTextWidget(c, body)
+        vLayout.addWidget(gutter)
+        self.gutter_layout = glayout = gutter.gutter_layout
         if c.config.getBool('use-gutter', default=False):
-            lineWidget = qt_text.LeoLineTextWidget(c, body)
-            vLayout.addWidget(lineWidget)
+            glayout.addWidget(gutter.number_bar)
+            glayout.addWidget(gutter.edit)
+            gutter.using_gutter = True
         else:
-            vLayout.addWidget(body)
+            glayout.addWidget(gutter.edit)
+            gutter.using_gutter = False
         sw.addWidget(page2)
         innerGrid.addWidget(sw, 0, 0, 1, 1)
         grid.addWidget(innerFrame, 0, 0, 1, 1)
         self.verticalLayout.addWidget(parent)
         # Official ivars
+        self.gutter = gutter
         self.text_page = page2
         self.stackedWidget = sw # used by LeoQtBody
         self.richTextEdit = body

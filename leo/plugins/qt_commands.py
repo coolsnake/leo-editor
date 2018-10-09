@@ -230,6 +230,29 @@ def style_set_selected(event):
     c = event.get('c')
     if c:
         c.styleSheetManager.set_selected_style_sheet()
+#@+node:ekr.20181009123539.1: ** qt: toggle-gutter
+@g.command('add-gutter')
+def add_gutter(event):
+    '''Add the gutter area showing line numbers.'''
+    c = event.get('c')
+    if not c:
+        return
+    dw = c.frame.top
+    gutter = dw.gutter
+    if gutter.using_gutter:
+        # NumberBar has a reference to gutter.edit.
+        # Apparently, this causes problems.
+        pass
+        # glayout.removeWidget(gutter.edit)
+        # glayout.removeWidget(gutter.number_bar)
+        # glayout.invalidate()
+        # glayout.addWidget(dw.gutter.edit)
+    else:
+        glayout = dw.gutter_layout
+        glayout.removeWidget(gutter.edit)
+        glayout.addWidget(gutter.number_bar)
+        glayout.addWidget(gutter.edit)
+        gutter.using_gutter = True
 #@-others
 #@@language python
 #@@tabwidth -4

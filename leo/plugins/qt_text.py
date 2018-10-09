@@ -397,13 +397,13 @@ class LeoLineTextWidget(QtWidgets.QFrame):
         e.setFrameStyle(self.NoFrame)
         # e.setAcceptRichText(False)
         self.number_bar = NumberBar(c, e)
+        self.number_bar.setObjectName('gutter')
         hbox = QtWidgets.QHBoxLayout(self)
         hbox.setSpacing(0)
         hbox.setContentsMargins(0, 0, 0, 0)
-        hbox.addWidget(self.number_bar)
-        hbox.addWidget(e)
         e.installEventFilter(self)
         e.viewport().installEventFilter(self)
+        self.gutter_layout = hbox
     #@+node:ekr.20150403094706.10: *3* eventFilter
     def eventFilter(self, obj, event):
         '''
