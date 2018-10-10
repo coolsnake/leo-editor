@@ -1257,6 +1257,7 @@
 </v>
 <v t="ekr.20140724164600.4590"><vh>@test zz end of leoImport tests</vh></v>
 </v>
+<v t="ekr.20160419061017.1"><vh>@test event classes</vh></v>
 </vnodes>
 <tnodes>
 <t tx="bwmulder.20050108100437.1">@killcolor
@@ -5296,6 +5297,26 @@ The next section is empty. It must not be deleted.
 Section 3, line 1
 
 '''
+</t>
+<t tx="ekr.20160419061017.1">if g.app.isExternalUnitTest or g.in_bridge:
+    self.skipTest('Can not be run in Travis CI')
+import leo.core.leoGui as leoGui # LeoKeyEvent
+import leo.core.leoVim as leoVim # VimEvent.
+import leo.plugins.qt_frame as qt_frame # EventWrapper
+event = func = next_w = parent = None
+char = shortcut = stroke = w = x = y = None
+x_root = y_root = None
+# The EventWrapper class is buried too deep to test easily.
+# I'll try harder if it ever become a problem ;-)
+    # dw = qt_frame.DynamicWindow(c, parent)
+    # event_wrapper = dw.EventWrapper(c, w, next_w, func)
+key_event = leoGui.LeoKeyEvent(
+    c, char, event, shortcut,
+    w, x, y, x_root, y_root)
+vim_event = leoVim.VimEvent(c, char, stroke, w)
+# assert hasattr(event_wrapper, 'c')
+assert hasattr(key_event, 'c')
+assert hasattr(vim_event, 'c')
 </t>
 <t tx="ekr.20160523094102.1"># Great ast docs: http://greentreesnakes.readthedocs.io/en/latest/nodes.html
 

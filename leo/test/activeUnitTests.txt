@@ -630,6 +630,8 @@ def removeFile(path):
         if trace:
             print("@test batch mode: removeFile: not found:",test_file)
 #@+node:ekr.20160419061017.1: *3* @test event classes
+if g.app.isExternalUnitTest or g.in_bridge:
+    self.skipTest('Can not be run in Travis CI')
 import leo.core.leoGui as leoGui # LeoKeyEvent
 import leo.core.leoVim as leoVim # VimEvent.
 import leo.plugins.qt_frame as qt_frame # EventWrapper
